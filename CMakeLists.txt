@@ -32,6 +32,8 @@ add_executable(
         game/Player.h
         src/RootObject.cpp
         header_files/RootObject.h
+        src/objects/Input.cpp
+        header_files/Input.h
 )
 
 target_link_libraries(${PROJECT_NAME} PRIVATE SDL3::SDL3 SDL3_image::SDL3_image)

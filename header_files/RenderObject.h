@@ -8,10 +8,10 @@ class GameWindow;
 
 class RenderObject : public Object {
 public:
-    explicit RenderObject(GameWindow* window, const std::string &path);
+    explicit RenderObject(GameWindow* window, std::string& path);
 
     void Set_Position(Vector2 position);
-    void DestroySelf() override;
+    void Destroy_Self() override;
 
     int z_order = 0;
     SDL_Texture* texture = nullptr;
