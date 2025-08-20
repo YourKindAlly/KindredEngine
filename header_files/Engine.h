@@ -6,7 +6,7 @@
 class Engine {
 public:
     Engine();
-    void Run();
+    void Run() const;
 
     GameWindow game_window;
 };

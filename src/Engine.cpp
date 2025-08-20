@@ -9,7 +9,7 @@ Engine::Engine() : game_window(800, 600) {
     }
 }
 
-void Engine::Run() {
+void Engine::Run() const {
     Time time;
 
     bool running = true;

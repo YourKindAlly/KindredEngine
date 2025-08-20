@@ -1,5 +1,4 @@
 #include <iostream>
-#include <utility>
 #include "../header_files/GameWindow.h"
 #include "../header_files/RootObject.h"
 #include "../header_files/RenderObject.h"
@@ -27,26 +26,37 @@ template<typename T>
 T* GameWindow::Create_Object() {
     static_assert(std::is_base_of_v<Object, T>, "T must derive from Object");
     auto object = new T{ this };
-    objects.push_back(*object);
+    objects.push_back(object);
     return object;
 }
 
 template<typename T>
 T* GameWindow::Create_Render_Object(std::string path) {
     static_assert(std::is_base_of_v<RenderObject, T>, "T must derive from RenderObject");
-    auto render_object = new T{ this, std::move(path) };
-    SDL_RenderTexture(sdl_renderer, render_object->texture, nullptr, nullptr);
-    objects.push_back(*render_object);
-    return render_object;
+    auto object = new T{ this, std::move(path) };
+
+    if (!object->texture) {
+        std::cerr << "Creating texture failed: " << SDL_GetError() << '\n';
+    }
+
+    SDL_SetTextureScaleMode(object->texture, scale_mode);
+    objects.push_back(object);
+    render_objects.push_back(object);
+    return object;
 }
 
 void GameWindow::Start() {
     const auto root = Create_Object<RootObject>();
-    objects.push_back(*root);
+    objects.push_back(root);
 }
 
 void GameWindow::Frame_Update() const {
     SDL_RenderClear(sdl_renderer);
+
+    for (auto& object : render_objects) {
+        SDL_RenderTexture(sdl_renderer, object->texture, &object->source_rect, &object->dest_rect);
+    }
+
     SDL_RenderPresent(sdl_renderer);
 }
 

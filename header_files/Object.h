@@ -17,7 +17,7 @@ public:
     std::string name;
     Transform transform;
     Object* parent = nullptr;
-    std::list<Object*> children;
+    std::list<Object*> children{};
 };
 
 
