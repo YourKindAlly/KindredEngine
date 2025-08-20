@@ -8,7 +8,7 @@ class GameWindow;
 
 class RenderObject : public Object {
 public:
-    explicit RenderObject(GameWindow* window, std::string path);
+    explicit RenderObject(GameWindow* window, const std::string &path);
 
     void Set_Position(Vector2 position);
     void DestroySelf() override;
