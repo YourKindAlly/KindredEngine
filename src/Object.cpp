@@ -1,5 +1,12 @@
 #include "../header_files/Object.h"
+#include "../header_files/GameWindow.h"
 
-void Object::AddChild(const std::shared_ptr<Object>& object) {
-    children.push_back(object);
+Object::Object(GameWindow* window) { }
+
+void Object::DestroySelf() {
+    for (const auto child : children) {
+        child->DestroySelf();
+    }
+
+    delete this;
 }

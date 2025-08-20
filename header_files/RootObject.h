@@ -2,10 +2,12 @@
 #define KINDREDENGINE_ROOTOBJECT_H
 
 #include "Object.h"
-#include "../game/Player.h"
+
+class GameWindow;
 
 class RootObject final : public Object {
-    std::shared_ptr<Player> player = std::make_shared<Player>();
+public:
+    explicit RootObject(GameWindow* window);
 };
 
 

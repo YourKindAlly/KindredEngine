@@ -1,7 +1,7 @@
 #ifndef SDL3TEST_GAMEWINDOW_H
 #define SDL3TEST_GAMEWINDOW_H
 
-#include <list>
+#include <string>
 #include <SDL3/SDL.h>
 #include "../header_files/Viewport.h"
 #include "../header_files/Object.h"
@@ -11,8 +11,11 @@ public:
     explicit GameWindow(int width, int height);
     ~GameWindow();
 
-    template<class T>
-    T *Create_Object();
+    template<typename T>
+    T* Create_Object();
+
+    template<typename T>
+    T* Create_Render_Object(std::string path);
 
     void Start();
     void Frame_Update() const;
@@ -22,7 +25,7 @@ public:
 private:
     SDL_Window* sdl_window;
     Viewport viewport;
-    std::list<std::shared_ptr<Object>> objects;
+    std::list<Object> objects{};
 };
 
 

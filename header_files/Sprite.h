@@ -3,10 +3,9 @@
 
 #include "../header_files/RenderObject.h"
 
-class Sprite final : public RenderObject {
+class Sprite : public RenderObject {
 public:
-    explicit Sprite(const char* path);
-    int z_order = 0;
+    explicit Sprite(GameWindow* window, std::string path);
 };
 
 

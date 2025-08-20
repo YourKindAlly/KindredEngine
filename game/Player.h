@@ -5,7 +5,7 @@
 
 class Player final : public Object {
 public:
-    Player();
+    explicit Player(GameWindow* window);
 };
 
 

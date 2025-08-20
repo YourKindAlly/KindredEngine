@@ -6,12 +6,14 @@
 
 class RenderObject : public Object {
 public:
-    explicit RenderObject(const char* path);
-    bool Buffer(GameWindow* window);
+    explicit RenderObject(GameWindow* window, std::string path);
+
+    void DestroySelf() override;
+
     int z_order = 0;
     SDL_Texture* texture = nullptr;
 protected:
-    const char* texture_path;
+    std::string texture_path;
 };
 
 

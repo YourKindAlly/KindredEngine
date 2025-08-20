@@ -1,7 +1,10 @@
 #include <iostream>
+#include <utility>
 #include "../header_files/GameWindow.h"
 #include "../header_files/RootObject.h"
 #include "../header_files/RenderObject.h"
+#include "../header_files/Sprite.h"
+#include "../game/Player.h"
 
 GameWindow::GameWindow(int width, int height) : viewport(width, height) {
     sdl_window = SDL_CreateWindow("WINDOW_TITLE", viewport.Get_Width(), viewport.Get_Height(), 0);
@@ -22,24 +25,24 @@ GameWindow::GameWindow(int width, int height) : viewport(width, height) {
 
 template<typename T>
 T* GameWindow::Create_Object() {
-    std::unique_ptr<T> object;
-    objects.push_back(object);
+    static_assert(std::is_base_of_v<Object, T>, "T must derive from Object");
+    auto object = new T{ this };
+    objects.push_back(*object);
     return object;
 }
 
+template<typename T>
+T* GameWindow::Create_Render_Object(std::string path) {
+    static_assert(std::is_base_of_v<RenderObject, T>, "T must derive from RenderObject");
+    auto render_object = new T{ this, std::move(path) };
+    SDL_RenderTexture(sdl_renderer, render_object->texture, nullptr, nullptr);
+    objects.push_back(*render_object);
+    return render_object;
+}
+
 void GameWindow::Start() {
-    const auto root = std::make_shared<RootObject>();
-
-    objects.push_back(root);
-
-    for (std::shared_ptr object : root->children) {
-        if (const auto render_object = dynamic_cast<RenderObject*>(object.get())) {
-            render_object->Buffer(this);
-            SDL_RenderTexture(sdl_renderer, render_object->texture, nullptr, nullptr);
-        }
-
-        objects.push_back(object);
-    }
+    const auto root = Create_Object<RootObject>();
+    objects.push_back(*root);
 }
 
 void GameWindow::Frame_Update() const {
@@ -52,3 +55,6 @@ GameWindow::~GameWindow() {
     SDL_DestroyWindow(sdl_window);
     SDL_Quit();
 }
+
+template Sprite* GameWindow::Create_Render_Object<Sprite>(std::string path);
+template Player* GameWindow::Create_Object<Player>();

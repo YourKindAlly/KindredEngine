@@ -1,22 +1,23 @@
 #ifndef SDL3TEST_GAMEOBJECT_H
 #define SDL3TEST_GAMEOBJECT_H
 
-#include <memory>
 #include <list>
 #include <string>
 #include "../header_files/Transform.h"
 
+class GameWindow;
+
 class Object {
 public:
-    Object() = default;
+    explicit Object(GameWindow* window);
     virtual ~Object() = default;
 
-    void AddChild(const std::shared_ptr<Object>& object);
+    virtual void DestroySelf();
 
     std::string name;
     Transform transform;
-    std::shared_ptr<Object> parent = nullptr;
-    std::list<std::shared_ptr<Object>> children;
+    Object* parent = nullptr;
+    std::list<Object*> children;
 };
 
 
