@@ -6,6 +6,8 @@
 class Player final : public Object {
 public:
     explicit Player(GameWindow* window);
+
+    void Update() override;
 };
 
 

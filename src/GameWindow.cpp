@@ -4,6 +4,7 @@
 #include "../header_files/RenderObject.h"
 #include "../header_files/Sprite.h"
 #include "../game/Player.h"
+#include "../header_files/Input.h"
 
 GameWindow::GameWindow(int width, int height) : viewport(width, height) {
     sdl_window = SDL_CreateWindow("WINDOW_TITLE", viewport.Get_Width(), viewport.Get_Height(), 0);
@@ -31,7 +32,7 @@ T* GameWindow::Create_Object() {
 }
 
 template<typename T>
-T* GameWindow::Create_Render_Object(std::string path) {
+T* GameWindow::Create_Render_Object(std::string& path) {
     static_assert(std::is_base_of_v<RenderObject, T>, "T must derive from RenderObject");
     auto object = new T{ this, std::move(path) };
 
@@ -68,3 +69,4 @@ GameWindow::~GameWindow() {
 
 template Sprite* GameWindow::Create_Render_Object<Sprite>(std::string path);
 template Player* GameWindow::Create_Object<Player>();
+template Input* GameWindow::Create_Object<Input>();

@@ -12,7 +12,11 @@ public:
     explicit Object(GameWindow* window);
     virtual ~Object() = default;
 
-    virtual void DestroySelf();
+    virtual void Update();
+    virtual void Destroy_Self();
+
+    template<typename T>
+    T* Get_First_Child();
 
     std::string name;
     Transform transform;

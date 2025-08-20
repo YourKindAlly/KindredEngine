@@ -5,7 +5,7 @@
 
 class Sprite : public RenderObject {
 public:
-    explicit Sprite(GameWindow* window, const std::string &path);
+    explicit Sprite(GameWindow* window, std::string &path);
 };
 
 
