@@ -32,7 +32,7 @@ T* GameWindow::Create_Object() {
 }
 
 template<typename T>
-T* GameWindow::Create_Render_Object(std::string& path) {
+T* GameWindow::Create_Render_Object(const std::string& path) {
     static_assert(std::is_base_of_v<RenderObject, T>, "T must derive from RenderObject");
     auto object = new T{ this, std::move(path) };
 
