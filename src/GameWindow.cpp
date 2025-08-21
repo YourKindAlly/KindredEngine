@@ -32,9 +32,9 @@ T* GameWindow::Create_Object() {
 }
 
 template<typename T>
-T* GameWindow::Create_Render_Object(std::string& path) {
+T* GameWindow::Create_Render_Object(const std::string& path) {
     static_assert(std::is_base_of_v<RenderObject, T>, "T must derive from RenderObject");
-    auto object = new T{ this, std::move(path) };
+    auto object = new T{ this, path };
 
     if (!object->texture) {
         std::cerr << "Creating texture failed: " << SDL_GetError() << '\n';
@@ -51,8 +51,12 @@ void GameWindow::Start() {
     objects.push_back(root);
 }
 
-void GameWindow::Frame_Update() const {
+void GameWindow::Frame_Update(float delta) const {
     SDL_RenderClear(sdl_renderer);
+
+    for (const auto object : objects) {
+        object->Update(delta);
+    }
 
     for (auto& object : render_objects) {
         SDL_RenderTexture(sdl_renderer, object->texture, &object->source_rect, &object->dest_rect);
@@ -67,6 +71,6 @@ GameWindow::~GameWindow() {
     SDL_Quit();
 }
 
-template Sprite* GameWindow::Create_Render_Object<Sprite>(std::string path);
+template Sprite* GameWindow::Create_Render_Object<Sprite>(const std::string& path);
 template Player* GameWindow::Create_Object<Player>();
 template Input* GameWindow::Create_Object<Input>();
