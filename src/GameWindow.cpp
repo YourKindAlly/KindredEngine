@@ -5,6 +5,8 @@
 #include "../header_files/Sprite.h"
 #include "../game/Player.h"
 #include "../header_files/Input.h"
+#include "../header_files/CollisionObject.h"
+#include "../header_files/CollisionBox.h"
 
 GameWindow::GameWindow(int width, int height) : viewport(width, height) {
     sdl_window = SDL_CreateWindow("WINDOW_TITLE", viewport.Get_Width(), viewport.Get_Height(), 0);
@@ -23,7 +25,7 @@ GameWindow::GameWindow(int width, int height) : viewport(width, height) {
     Start();
 }
 
-template<typename T>
+template<class T>
 T* GameWindow::Create_Object() {
     static_assert(std::is_base_of_v<Object, T>, "T must derive from Object");
     auto object = new T{ this };
@@ -31,7 +33,7 @@ T* GameWindow::Create_Object() {
     return object;
 }
 
-template<typename T>
+template<class T>
 T* GameWindow::Create_Render_Object(const std::string& path) {
     static_assert(std::is_base_of_v<RenderObject, T>, "T must derive from RenderObject");
     auto object = new T{ this, path };
@@ -43,6 +45,16 @@ T* GameWindow::Create_Render_Object(const std::string& path) {
     SDL_SetTextureScaleMode(object->texture, scale_mode);
     objects.push_back(object);
     render_objects.push_back(object);
+    return object;
+}
+
+template<class T>
+T* GameWindow::Create_Collision_Object(const Shape& shape) {
+    static_assert(std::is_base_of_v<CollisionObject, T>, "T must derive from CollisionObject");
+    auto object = new T{ this, shape };
+
+    objects.push_back(object);
+    collision_objects.push_back(object);
     return object;
 }
 
@@ -65,12 +77,17 @@ void GameWindow::Frame_Update(float delta) const {
     SDL_RenderPresent(sdl_renderer);
 }
 
+Viewport* GameWindow::Get_Viewport() {
+    return &viewport;
+}
+
 GameWindow::~GameWindow() {
     SDL_DestroyRenderer(sdl_renderer);
     SDL_DestroyWindow(sdl_window);
     SDL_Quit();
 }
 
-template Sprite* GameWindow::Create_Render_Object<Sprite>(const std::string& path);
 template Player* GameWindow::Create_Object<Player>();
 template Input* GameWindow::Create_Object<Input>();
+template Sprite* GameWindow::Create_Render_Object<Sprite>(const std::string& path);
+template CollisionBox*  GameWindow::Create_Collision_Object<CollisionBox>(const Shape& shape);

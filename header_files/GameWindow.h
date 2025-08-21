@@ -3,6 +3,7 @@
 
 #include <string>
 #include <SDL3/SDL.h>
+#include "CollisionObject.h"
 #include "../header_files/Viewport.h"
 #include "../header_files/Object.h"
 #include "../header_files/RenderObject.h"
@@ -18,6 +19,11 @@ public:
     template<typename T>
     T* Create_Render_Object(const std::string& path);
 
+    template<typename T>
+    T* Create_Collision_Object(const Shape& shape);
+
+    Viewport* Get_Viewport();
+
     void Start();
     void Frame_Update(float delta) const;
 
@@ -25,6 +31,7 @@ public:
     SDL_ScaleMode scale_mode;
     std::list<Object*> objects{};
     std::list<RenderObject*> render_objects{};
+    std::list<CollisionObject*> collision_objects{};
 private:
     SDL_Window* sdl_window;
     Viewport viewport;

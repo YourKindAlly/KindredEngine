@@ -12,7 +12,7 @@ add_executable(
         main.cpp
         src/Engine.cpp
         header_files/Engine.h
-        src/Object.cpp
+        src/objects/Object.cpp
         header_files/Object.h
         src/Time.cpp
         header_files/Time.h
@@ -27,7 +27,7 @@ add_executable(
         header_files/Sprite.h
         src/GameWindow.cpp
         header_files/GameWindow.h
-        src/RenderObject.cpp
+        src/objects/RenderObject.cpp
         header_files/RenderObject.h
         game/Player.cpp
         game/Player.h
@@ -35,6 +35,16 @@ add_executable(
         header_files/RootObject.h
         src/objects/Input.cpp
         header_files/Input.h
+        src/objects/CollisionObject.cpp
+        header_files/CollisionObject.h
+        src/Rect.cpp
+        header_files/Rect.h
+        src/Shape.cpp
+        header_files/Shape.h
+        src/objects/CollisionBox.cpp
+        header_files/CollisionBox.h
+        game/Astroid.cpp
+        game/Astroid.h
 )
 
 target_link_libraries(${PROJECT_NAME} PRIVATE SDL3::SDL3 SDL3_image::SDL3_image)

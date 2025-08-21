@@ -1,3 +1,4 @@
+#include <random>
 #include <cmath>
 #include "../header_files/Vector2.h"
 
@@ -15,6 +16,13 @@ Vector2 Vector2::operator+=(const Vector2& right) const {
     Vector2 temp = *this;
     temp.x += right.x;
     temp.y += right.y;
+    return temp;
+}
+
+Vector2 Vector2::operator*=(float right) const {
+    Vector2 temp = *this;
+    temp.x *= right;
+    temp.y *= right;
     return temp;
 }
 
@@ -38,4 +46,18 @@ void Vector2::Normalize() {
 
     x /= magnitude;
     y /= magnitude;
+}
+
+Vector2 Vector2::Get_Random_Direction() {
+    Vector2 temp{
+        static_cast<float>(std::rand() % 3 - 1),
+        static_cast<float>(std::rand() % 3 - 1)
+    };
+
+    temp.Normalize();
+
+    if (temp.x == 0 && temp.y == 0)
+        temp.x = 1;
+
+    return temp;
 }

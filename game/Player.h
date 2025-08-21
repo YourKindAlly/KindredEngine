@@ -11,7 +11,7 @@ public:
     void Update(float delta) override;
 
     Input* input = nullptr;
-    float move_speed = 0;
+    float move_speed = 300;
 };
 
 

@@ -4,7 +4,6 @@
 
 Player::Player(GameWindow* window) : Object(window) {
     transform = Transform{ Vector2(300, 200) };
-    move_speed = 300;
 
     auto sprite = window->Create_Render_Object<Sprite>("../assets/ship.png");
     sprite->parent = this;
@@ -24,7 +23,7 @@ Player::Player(GameWindow* window) : Object(window) {
 }
 
 void Player::Update(const float delta) {
-    const auto move_direction = input->Get_Normalized_Vector("move_up", "move_down", "move_left", "move_right");
+    const auto move_direction = input->Get_Normalized_Vector("move_left", "move_right", "move_up", "move_down");
     Set_Position(transform.position + move_direction * move_speed * delta);
     Move_Children();
 }

@@ -1,5 +1,5 @@
-#include "../header_files/Object.h"
-#include "../header_files/GameWindow.h"
+#include "../../header_files/Object.h"
+#include "../../header_files/GameWindow.h"
 
 Object::Object(GameWindow* window) { }
 
