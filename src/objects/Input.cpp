@@ -17,7 +17,7 @@ bool Input::Is_Action_Up(const std::string& action_name) {
     return !input_actions[action_name]->pressed;
 }
 
-Vector2 Input::Get_Vector(std::string &pos_x, std::string &neg_x, std::string &pos_y, std::string &neg_y) {
+Vector2 Input::Get_Vector(const std::string &pos_x, const std::string &neg_x, const std::string &pos_y, const std::string &neg_y) {
     Vector2 vector{};
 
     if (Is_Action_Up(pos_x))
@@ -32,7 +32,7 @@ Vector2 Input::Get_Vector(std::string &pos_x, std::string &neg_x, std::string &p
     return vector;
 }
 
-Vector2 Input::Get_Normalized_Vector(std::string &pos_x, std::string &neg_x, std::string &pos_y, std::string &neg_y) {
+Vector2 Input::Get_Normalized_Vector(const std::string& pos_x, const std::string& neg_x, const std::string& pos_y, const std::string& neg_y) {
     Vector2 vector{};
 
     if (Is_Action_Up(pos_x))
