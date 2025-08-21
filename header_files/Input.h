@@ -24,5 +24,4 @@ private:
     std::map<std::string, InputAction*> input_actions;
 };
 
-
 #endif //KINDREDENGINE_INPUT_H

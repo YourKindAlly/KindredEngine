@@ -21,16 +21,16 @@ bool Input::Is_Action_Up(const std::string& action_name) {
 Vector2 Input::Get_Vector(const std::string &pos_x, const std::string &neg_x, const std::string &pos_y, const std::string &neg_y) {
     Vector2 vector{};
 
-    if (Is_Action_Up(pos_x))
+    if (Is_Action_Down(neg_y))
         vector.x = 1;
-    else if (Is_Action_Down(neg_x))
+    else if (Is_Action_Down(pos_y))
         vector.x = -1;
     else
         vector.x = 0;
 
-    if (Is_Action_Down(pos_y))
+    if (Is_Action_Down(neg_x))
         vector.y = 1;
-    else if (Is_Action_Down(neg_y))
+    else if (Is_Action_Down(pos_x))
         vector.y = -1;
     else
         vector.y = 0;
