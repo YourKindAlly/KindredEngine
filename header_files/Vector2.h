@@ -7,6 +7,8 @@ struct Vector2 {
     Vector2(float x, float y);
 
     Vector2 operator+=(const Vector2& right) const;
+    Vector2 operator+(const Vector2 &right) const;
+    Vector2 operator*(float right) const;
 
     [[nodiscard]] float GetMagnitude() const;
     void Normalize();

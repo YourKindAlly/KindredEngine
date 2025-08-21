@@ -3,7 +3,7 @@
 #include "../game/Player.h"
 
 RootObject::RootObject(GameWindow* window) : Object(window) {
-    auto player = window->Create_Object<Player>();
+    const auto player = window->Create_Object<Player>();
     player->parent = this;
     children.push_back(player);
     window->objects.push_back(player);
