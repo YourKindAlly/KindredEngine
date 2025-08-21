@@ -3,6 +3,7 @@
 
 #include <list>
 #include <string>
+#include <SDL3/SDL.h>
 #include "../header_files/Transform.h"
 
 class GameWindow;
@@ -12,7 +13,9 @@ public:
     explicit Object(GameWindow* window);
     virtual ~Object() = default;
 
-    virtual void Update();
+    void Set_Position(Vector2 position);
+    virtual void Update(float delta);
+    void Move_Children() const;
     virtual void Destroy_Self();
 
     template<typename T>
@@ -22,6 +25,8 @@ public:
     Transform transform;
     Object* parent = nullptr;
     std::list<Object*> children{};
+    SDL_FRect source_rect{0, 0, 64, 64};
+    SDL_FRect dest_rect{0, 0, 64, 64};
 };
 
 

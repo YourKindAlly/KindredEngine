@@ -8,9 +8,10 @@ class Player final : public Object {
 public:
     explicit Player(GameWindow* window);
 
-    void Update() override;
+    void Update(float delta) override;
 
     Input* input = nullptr;
+    float move_speed = 0;
 };
 
 

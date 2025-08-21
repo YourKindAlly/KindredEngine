@@ -10,7 +10,7 @@ Engine::Engine() : game_window(800, 600) {
 }
 
 void Engine::Run() const {
-    Time time;
+    Time time{};
 
     bool running = true;
     while (running) {
@@ -20,6 +20,8 @@ void Engine::Run() const {
         if (keys[SDL_SCANCODE_ESCAPE])
             running = false;
 
-        game_window.Frame_Update();
+        time.Update_Delta_Time();
+
+        game_window.Frame_Update(time.Get_Delta_Time());
     }
 }

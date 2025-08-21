@@ -19,7 +19,7 @@ public:
     T* Create_Render_Object(const std::string& path);
 
     void Start();
-    void Frame_Update() const;
+    void Frame_Update(float delta) const;
 
     SDL_Renderer* sdl_renderer;
     SDL_ScaleMode scale_mode;
