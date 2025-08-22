@@ -1,5 +1,6 @@
 #include <random>
 #include <cmath>
+#include <SDL3/SDL.h>
 #include "../header_files/Vector2.h"
 
 Vector2::Vector2() {
@@ -50,14 +51,14 @@ void Vector2::Normalize() {
 
 Vector2 Vector2::Get_Random_Direction() {
     Vector2 temp{
-        static_cast<float>(std::rand() % 3 - 1),
-        static_cast<float>(std::rand() % 3 - 1)
+        static_cast<float>(SDL_rand(30) - 10) * 0.1f,
+        static_cast<float>(SDL_rand(30) - 10) * 0.1f
     };
 
-    temp.Normalize();
-
-    if (temp.x == 0 && temp.y == 0)
+    if (temp.x < 0.9 && temp.x > -0.9 && temp.y < 0.9 && temp.y > -0.9)
         temp.x = 1;
+
+    temp.Normalize();
 
     return temp;
 }

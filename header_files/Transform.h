@@ -5,6 +5,7 @@
 
 class Transform {
 public:
+    Vector2 forward = Vector2{0, 1};
     Vector2 position = Vector2{0, 0};
     float rotation = 0;
 };

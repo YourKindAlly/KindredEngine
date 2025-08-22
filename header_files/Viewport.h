@@ -1,7 +1,6 @@
 #ifndef SDL3TEST_VIEWPORT_H
 #define SDL3TEST_VIEWPORT_H
 
-
 #include "Vector2.h"
 
 class Viewport {
@@ -15,6 +14,5 @@ private:
     int height = 0;
     Vector2 center;
 };
-
 
 #endif //SDL3TEST_VIEWPORT_H

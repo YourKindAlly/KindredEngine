@@ -1,4 +1,5 @@
 #include <iostream>
+#include <memory>
 #include "../header_files/GameWindow.h"
 #include "../header_files/RootObject.h"
 #include "../header_files/RenderObject.h"
@@ -70,8 +71,20 @@ void GameWindow::Frame_Update(float delta) const {
         object->Update(delta);
     }
 
+    std::list<std::unique_ptr<SDL_FPoint>> centers{};
+
     for (auto& object : render_objects) {
-        SDL_RenderTexture(sdl_renderer, object->texture, &object->source_rect, &object->dest_rect);
+        auto center = std::make_unique<SDL_FPoint>(SDL_FPoint{object->center.x, object->center.y});
+        centers.push_back(std::move(center));
+        SDL_RenderTextureRotated(
+            sdl_renderer,
+            object->texture,
+            &object->source_rect,
+            &object->dest_rect,
+            object->Get_Transform()->rotation,
+            center.get(),
+            SDL_FLIP_NONE
+            );
     }
 
     SDL_RenderPresent(sdl_renderer);

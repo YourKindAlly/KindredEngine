@@ -38,6 +38,19 @@ Vector2 Input::Get_Vector(const std::string &pos_x, const std::string &neg_x, co
     return vector;
 }
 
+float Input::Get_Axis(const std::string &pos, const std::string &neg) {
+    float axis = 0;
+
+    if (Is_Action_Down(pos))
+        axis = 1;
+    else if (Is_Action_Down(neg))
+        axis = -1;
+    else
+        axis = 0;
+
+    return axis;
+}
+
 Vector2 Input::Get_Normalized_Vector(const std::string& pos_x, const std::string& neg_x, const std::string& pos_y, const std::string& neg_y) {
     Vector2 vector{};
 

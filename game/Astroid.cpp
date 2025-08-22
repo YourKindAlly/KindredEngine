@@ -12,5 +12,5 @@ Astroid::Astroid(GameWindow* window) : Object(window) {
 }
 
 void Astroid::Update(float delta) {
-    
+    Set_Position(Get_Transform()->position + direction * move_speed * delta);
 }

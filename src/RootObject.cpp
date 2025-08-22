@@ -19,6 +19,5 @@ RootObject::RootObject(GameWindow* window) : Object(window) {
         };
         window->objects.push_back(astroid);
         astroid->Set_Position(random_position);
-        astroid->Move_Children();
     }
 }
