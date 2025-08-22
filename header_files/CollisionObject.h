@@ -11,7 +11,7 @@ public:
     Shape shape{};
 protected:
     explicit CollisionObject(GameWindow* window, const Shape& shape);
-    ~CollisionObject();
+    ~CollisionObject() override;
 };
 
 

@@ -4,8 +4,8 @@
 #include "../header_files/Object.h"
 
 enum Direction {
-    Left,
-    Right,
+    Left = -1,
+    Right = 1,
 };
 
 class Astroid : public Object {
@@ -16,6 +16,7 @@ public:
 
     Vector2 direction{};
     Direction rotation_direction = Left;
+    float rotation_speed = 10;
     float move_speed = 10;
 };
 

@@ -5,5 +5,5 @@ CollisionObject::CollisionObject(GameWindow* window, const Shape& shape) : Objec
     this->shape = shape;
 }
 
-CollisionObject::~CollisionObject() { }
+CollisionObject::~CollisionObject() = default;
 
