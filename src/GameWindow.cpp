@@ -103,4 +103,4 @@ GameWindow::~GameWindow() {
 template Player* GameWindow::Create_Object<Player>();
 template Input* GameWindow::Create_Object<Input>();
 template Sprite* GameWindow::Create_Render_Object<Sprite>(const std::string& path);
-template CollisionBox*  GameWindow::Create_Collision_Object<CollisionBox>(const Shape& shape);
+template CollisionBox* GameWindow::Create_Collision_Object<CollisionBox>(const Shape& shape);

@@ -5,6 +5,7 @@
 
 class Rect : public Shape {
 public:
+    Rect(float width, float height);
     ~Rect() override;
     float width = 0;
     float height = 0;

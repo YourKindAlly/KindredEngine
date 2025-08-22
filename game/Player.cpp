@@ -1,6 +1,7 @@
 #include "Player.h"
 #include "../header_files/Sprite.h"
 #include "../header_files/GameWindow.h"
+#include "../header_files/Rect.h"
 
 Player::Player(GameWindow* window) : Object(window) {
     const auto sprite = game_window->Create_Render_Object<Sprite>("../assets/ship.png");
@@ -17,6 +18,12 @@ Player::Player(GameWindow* window) : Object(window) {
     input->Create_Action("move_down", SDL_SCANCODE_S);
     input->Create_Action("move_left", SDL_SCANCODE_A);
     input->Create_Action("move_right", SDL_SCANCODE_D);
+
+    const Rect collision_shape = Rect{ 40, 64 };
+    const auto collision_box = new CollisionBox{ window, collision_shape };
+    collision = collision_box;
+    collision->parent = this;
+    children.push_back(collision);
 
     Set_Position_In_Viewport({0, 0});
 }

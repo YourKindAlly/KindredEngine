@@ -1,4 +1,3 @@
-#include <random>
 #include <cmath>
 #include <SDL3/SDL.h>
 #include "../header_files/Vector2.h"
@@ -40,7 +39,7 @@ float Vector2::GetMagnitude() const {
 }
 
 void Vector2::Normalize() {
-    float magnitude = GetMagnitude();
+    const float magnitude = GetMagnitude();
 
     if (magnitude < 0.9 && magnitude > -0.9)
         return;

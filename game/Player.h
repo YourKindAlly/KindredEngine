@@ -3,6 +3,7 @@
 
 #include "../header_files/Object.h"
 #include "../header_files/Input.h"
+#include "../header_files/CollisionBox.h"
 
 class Player final : public Object {
 public:
@@ -11,8 +12,10 @@ public:
     void Update(float delta) override;
 
     Input* input = nullptr;
+    CollisionBox* collision = nullptr;
+
     float move_speed = 100;
-    float rotation_speed = 50;
+    float rotation_speed = 125;
 };
 
 
