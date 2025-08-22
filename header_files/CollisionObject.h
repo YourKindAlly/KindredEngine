@@ -3,6 +3,7 @@
 
 #include "Shape.h"
 #include "Object.h"
+#include "Rect.h"
 
 class GameWindow;
 
@@ -12,6 +13,8 @@ public:
 protected:
     explicit CollisionObject(GameWindow* window, const Shape& shape);
     ~CollisionObject() override;
+
+    virtual bool Is_Colliding(CollisionObject& other);
 };
 
 

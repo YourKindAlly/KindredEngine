@@ -6,8 +6,6 @@
 class Shape {
 public:
     virtual ~Shape() = default;
-
-    virtual bool Is_Intersecting(const Shape& other);
 protected:
     Vector2 center;
 };

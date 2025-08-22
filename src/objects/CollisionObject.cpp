@@ -7,3 +7,6 @@ CollisionObject::CollisionObject(GameWindow* window, const Shape& shape) : Objec
 
 CollisionObject::~CollisionObject() = default;
 
+bool CollisionObject::Is_Colliding(CollisionObject &other) {
+    return false;
+}

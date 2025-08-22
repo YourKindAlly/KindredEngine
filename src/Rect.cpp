@@ -9,3 +9,4 @@ Rect::Rect(const float width, const float height) {
 }
 
 Rect::~Rect() = default;
+

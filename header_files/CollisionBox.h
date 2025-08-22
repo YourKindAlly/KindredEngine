@@ -6,6 +6,8 @@
 class CollisionBox : public CollisionObject {
 public:
     CollisionBox(GameWindow *window, const Shape &shape);
+
+    bool Is_Colliding(CollisionObject &other) override;
 };
 
 #endif //KINDREDENGINE_COLLISIONBOX_H
