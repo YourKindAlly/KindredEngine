@@ -11,8 +11,9 @@ Astroid::Astroid(GameWindow* window) : Object(window) {
     sprite->parent = this;
     children.push_back(sprite);
 
-    const Rect collision_shape{ 11, 11 };
-    const auto collision_box = new CollisionBox{ window, collision_shape };
+    Rect collision_shape{ 11, 11 };
+    const auto collision_box = window->Create_Collision_Object<CollisionBox>(collision_shape);
+    collision_box->layer = 1;
     collision_box->parent = this;
     children.push_back(collision_box);
 

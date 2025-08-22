@@ -71,6 +71,12 @@ void GameWindow::Frame_Update(float delta) const {
         object->Update(delta);
     }
 
+    for (int i = 0; i < collision_objects.size(); ++i) {
+        for (int j = 1; j < collision_objects.size(); ++j) {
+            if (collision_objects[i] == collision_objects[j]) continue;
+        }
+    }
+
     std::list<std::unique_ptr<SDL_FPoint>> centers{};
 
     for (auto& object : render_objects) {

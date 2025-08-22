@@ -21,6 +21,7 @@ Player::Player(GameWindow* window) : Object(window) {
 
     const Rect collision_shape = Rect{ 40, 64 };
     const auto collision_box = new CollisionBox{ window, collision_shape };
+    collision_box->mask = 1;
     collision = collision_box;
     collision->parent = this;
     children.push_back(collision);

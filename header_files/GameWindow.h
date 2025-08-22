@@ -3,6 +3,7 @@
 
 #include <string>
 #include <SDL3/SDL.h>
+#include <vector>
 #include "CollisionObject.h"
 #include "../header_files/Viewport.h"
 #include "../header_files/Object.h"
@@ -29,9 +30,9 @@ public:
 
     SDL_Renderer* sdl_renderer;
     SDL_ScaleMode scale_mode;
-    std::list<Object*> objects{};
-    std::list<RenderObject*> render_objects{};
-    std::list<CollisionObject*> collision_objects{};
+    std::vector<Object*> objects{};
+    std::vector<RenderObject*> render_objects{};
+    std::vector<CollisionObject*> collision_objects{};
 private:
     SDL_Window* sdl_window;
     Viewport viewport;

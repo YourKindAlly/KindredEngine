@@ -10,6 +10,8 @@ class GameWindow;
 class CollisionObject : public Object {
 public:
     Shape shape{};
+    int layer = 0;
+    int mask = 0;
 protected:
     explicit CollisionObject(GameWindow* window, const Shape& shape);
     ~CollisionObject() override;
