@@ -3,7 +3,7 @@
 #include "../header_files/GameWindow.h"
 #include "../header_files/Rect.h"
 
-Player::Player(GameWindow* window) : Object(window) {
+Player::Player(GameWindow* window) : CollisionHolder(window) {
     const auto sprite = game_window->Create_Render_Object<Sprite>("../assets/ship.png");
     sprite->parent = this;
     children.push_back(sprite);
@@ -19,15 +19,19 @@ Player::Player(GameWindow* window) : Object(window) {
     input->Create_Action("move_left", SDL_SCANCODE_A);
     input->Create_Action("move_right", SDL_SCANCODE_D);
 
-    const Rect collision_shape = Rect{ 40, 64 };
-    const auto collision_box = new CollisionBox{ window, collision_shape };
-    collision_box->mask = 1;
+    const Rect collision_shape{ 40, 64 };
+    const auto collision_box = window->Create_Collision_Object<CollisionBox>(collision_shape);
     collision = collision_box;
+    collision->mask = 1;
     collision->parent = this;
     children.push_back(collision);
 
     Set_Position_In_Viewport({0, 0});
 }
+
+void Player::On_Collision_Enter(const CollisionBox &other) { }
+
+void Player::On_Collision_Exit(const CollisionBox &other) { }
 
 void Player::Update(const float delta) {
     const auto forward_direction = input->Get_Axis("move_up", "move_down");

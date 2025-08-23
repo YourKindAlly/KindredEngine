@@ -50,8 +50,8 @@ T* GameWindow::Create_Render_Object(const std::string& path) {
 }
 
 template<class T>
-T* GameWindow::Create_Collision_Object(const Shape& shape) {
-    static_assert(std::is_base_of_v<CollisionObject, T>, "T must derive from CollisionObject");
+T* GameWindow::Create_Collision_Object(const Rect& shape) {
+    static_assert(std::is_base_of_v<CollisionBox, T>, "T must derive from CollisionObject");
     auto object = new T{ this, shape };
 
     objects.push_back(object);
@@ -71,9 +71,22 @@ void GameWindow::Frame_Update(float delta) const {
         object->Update(delta);
     }
 
-    for (int i = 0; i < collision_objects.size(); ++i) {
-        for (int j = 1; j < collision_objects.size(); ++j) {
-            if (collision_objects[i] == collision_objects[j]) continue;
+    for (auto mask_object : collision_objects) {
+        for (auto layer_object : collision_objects) {
+            if (mask_object == layer_object) continue;
+            if (mask_object->mask != layer_object->layer) continue;
+            if (dynamic_cast<CollisionHolder*>(layer_object->parent) == nullptr) continue;
+
+            if (const auto parent = dynamic_cast<CollisionHolder*>(layer_object->parent); parent->colliding_with == nullptr) {
+                if (!mask_object->Is_Colliding(*layer_object)) continue;
+                parent->colliding_with = mask_object;
+                parent->On_Collision_Enter(*mask_object);
+            }
+            else if (parent->colliding_with != nullptr && parent->colliding_with == mask_object) {
+                if (mask_object->Is_Colliding(*layer_object)) continue;
+                parent->colliding_with = nullptr;
+                parent->On_Collision_Exit(*mask_object);
+            }
         }
     }
 
@@ -109,4 +122,3 @@ GameWindow::~GameWindow() {
 template Player* GameWindow::Create_Object<Player>();
 template Input* GameWindow::Create_Object<Input>();
 template Sprite* GameWindow::Create_Render_Object<Sprite>(const std::string& path);
-template CollisionBox* GameWindow::Create_Collision_Object<CollisionBox>(const Shape& shape);

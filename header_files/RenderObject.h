@@ -2,7 +2,7 @@
 #define SDL3TEST_RENDEROBJECT_H
 
 #include <SDL3/SDL.h>
-#include "../header_files/Object.h"
+#include "Object.h"
 
 class RenderObject : public Object {
 public:

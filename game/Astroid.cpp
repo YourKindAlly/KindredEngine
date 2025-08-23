@@ -4,18 +4,19 @@
 #include "../header_files/Rect.h"
 #include "../header_files/CollisionBox.h"
 
-Astroid::Astroid(GameWindow* window) : Object(window) {
+Astroid::Astroid(GameWindow* window) : CollisionHolder(window) {
     direction = Vector2::Get_Random_Direction();
 
     const auto sprite = window->Create_Render_Object<Sprite>("../assets/astroid.png");
     sprite->parent = this;
     children.push_back(sprite);
 
-    Rect collision_shape{ 11, 11 };
-    const auto collision_box = window->Create_Collision_Object<CollisionBox>(collision_shape);
-    collision_box->layer = 1;
-    collision_box->parent = this;
-    children.push_back(collision_box);
+    const Rect collision_shape{ 44, 44 };
+    auto collision_box = window->Create_Collision_Object<CollisionBox>(collision_shape);
+    collision = collision_box;
+    collision->layer = 1;
+    collision->parent = this;
+    children.push_back(collision);
 
     rotation_direction = SDL_rand(2) == 0 ? Left : Right;
 }

@@ -4,10 +4,11 @@
 #include <string>
 #include <SDL3/SDL.h>
 #include <vector>
-#include "CollisionObject.h"
-#include "../header_files/Viewport.h"
-#include "../header_files/Object.h"
-#include "../header_files/RenderObject.h"
+#include "Viewport.h"
+#include "Object.h"
+#include "RenderObject.h"
+#include "CollisionBox.h"
+#include "Rect.h"
 
 class GameWindow {
 public:
@@ -21,7 +22,7 @@ public:
     T* Create_Render_Object(const std::string& path);
 
     template<typename T>
-    T* Create_Collision_Object(const Shape& shape);
+    T* Create_Collision_Object(const Rect& shape);
 
     Viewport* Get_Viewport();
 
@@ -32,7 +33,7 @@ public:
     SDL_ScaleMode scale_mode;
     std::vector<Object*> objects{};
     std::vector<RenderObject*> render_objects{};
-    std::vector<CollisionObject*> collision_objects{};
+    std::vector<CollisionBox*> collision_objects{};
 private:
     SDL_Window* sdl_window;
     Viewport viewport;

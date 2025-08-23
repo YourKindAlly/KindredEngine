@@ -45,6 +45,8 @@ add_executable(
         header_files/CollisionBox.h
         game/Astroid.cpp
         game/Astroid.h
+        src/objects/CollisionHolder.cpp
+        header_files/CollisionHolder.h
 )
 
 target_link_libraries(${PROJECT_NAME} PRIVATE SDL3::SDL3 SDL3_image::SDL3_image)

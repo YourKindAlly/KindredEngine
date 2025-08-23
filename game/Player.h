@@ -4,11 +4,14 @@
 #include "../header_files/Object.h"
 #include "../header_files/Input.h"
 #include "../header_files/CollisionBox.h"
+#include "../header_files/CollisionHolder.h"
 
-class Player final : public Object {
+class Player final : public CollisionHolder {
 public:
     explicit Player(GameWindow* window);
 
+    void On_Collision_Enter(const CollisionBox& other) override;
+    void On_Collision_Exit(const CollisionBox& other) override;
     void Update(float delta) override;
 
     Input* input = nullptr;
